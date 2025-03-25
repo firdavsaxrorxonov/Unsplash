@@ -2,6 +2,7 @@ import React from 'react';
 import { FaRegHeart, FaHeart, FaDownload } from 'react-icons/fa';
 import { useGlobalContext } from '../hooks/useGlobalContext';
 import { toast } from 'react-toastify';
+import noneImage from '../assets/user.png'
 import 'react-toastify/dist/ReactToastify.css';
 
 function Image({ image, added }) {
@@ -39,8 +40,8 @@ function Image({ image, added }) {
       <img src={image?.urls?.regular || image?.image || image?.download_url} alt={image?.alt_description || "No description"} className='w-full rounded-md' />
 
       <span className='absolute left-2 bottom-2 flex gap-2 items-center invisible opacity-0 cursor-pointer group-hover:opacity-100 group-hover:visible transition-all duration-300'>
-        <img src={image?.user?.profile_image?.large || 'https://via.placeholder.com/50'} alt={image?.user?.name + " avatar" || "Unknown user"} className='w-5 h-5 md:w-8 md:h-8 rounded-full' />
-        <p className='text-white text-xs md:text-sm'>{image?.user?.name || "Unknown user"}</p>
+        <img src={image?.user?.profile_image?.large || noneImage} alt={image?.user?.name + " avatar" || image.author.username || "Unknownr"} className='w-5 h-5 md:w-8 md:h-8 rounded-full' />
+        <p className='text-white text-xs md:text-sm'>{image?.user?.name || image.author.username || "Unknown user"}</p>
       </span>
 
       <span className='absolute border-white h-7 w-7 cursor-pointer right-2 invisible opacity-0 bottom-2 group-hover:opacity-100 group-hover:visible transition-all duration-300'>

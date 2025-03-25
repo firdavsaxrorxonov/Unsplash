@@ -14,7 +14,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/v1/auth/login", {
+      const response = await fetch("https://backendforunsplashclone-production.up.railway.app/api/v1/auth/login/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
@@ -23,6 +23,7 @@ function Login() {
       const data = await response.json();
       if (data.key) {
         localStorage.setItem("isAuthenticated", data.key);
+        localStorage.setItem("username", username);
         navigate(from, { replace: true });
       } else {
         setError("Login yoki parol noto‘g‘ri!");
