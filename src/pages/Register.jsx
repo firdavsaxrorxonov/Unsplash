@@ -18,28 +18,39 @@ function Register() {
     }
 
     try {
-      const response = await fetch("https://backendforunsplashclone-production.up.railway.app/api/v1/auth/registration/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username: username, email: email, password1: password, password2: password }),
-      });
+      const response = await fetch(
+        "https://backendforunsplashclone-production.up.railway.app/api/v1/auth/registration/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: username,
+            email: email,
+            password1: password,
+            password2: password,
+          }),
+        }
+      );
 
       const data = await response.json();
 
-      localStorage.setItem("isAuthenticated", data);
-
-      navigate("/");
-
-
+      if (response.ok) {
+        localStorage.setItem("isAuthenticated", "true");
+        localStorage.setItem("username", username);
+        navigate("/");
+      } else {
+        setError(data.detail || "Ro‘yxatdan o‘tishda xatolik yuz berdi.");
+      }
     } catch (error) {
-      setError(`Error: ${error.message}`);
+      setError(`Xatolik: ${error.message}`);
     }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/images/register-bg.jpg')" }}>
+    <div className="flex justify-center items-center min-h-screen bg-cover bg-center"
+      style={{ backgroundImage: "url('/images/register-bg.jpg')" }}>
       <div className="card w-96 bg-white bg-opacity-90 shadow-xl p-6">
         <h2 className="text-2xl font-bold text-center text-gray-800">Ro‘yxatdan o‘tish</h2>
         {error && <p className="text-red-500 text-center">{error}</p>}
