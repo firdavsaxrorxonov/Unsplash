@@ -18,33 +18,24 @@ function Register() {
     }
 
     try {
-      const response = await fetch(
-        "https://backendforunsplashclone-production.up.railway.app/api/v1/auth/registration/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: username,
-            email: email,
-            password1: password,
-            password2: password,
-          }),
-        }
-      );
+      const response = await fetch("https://backendforunsplashclone-production.up.railway.app/api/v1/auth/registration/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username: username, email: email, password1: password, password2: password }),
+      });
 
       const data = await response.json();
-
-      if (response.ok) {
-        localStorage.setItem("isAuthenticated", "true");
+      if (data.key) {
+        localStorage.setItem("isAuthenticated", data?.key);
         localStorage.setItem("username", username);
         navigate("/");
-      } else {
-        setError(data.detail || "Ro‘yxatdan o‘tishda xatolik yuz berdi.");
       }
+
+
     } catch (error) {
-      setError(`Xatolik: ${error.message}`);
+      setError(`Error: ${error.message}`);
     }
   };
 

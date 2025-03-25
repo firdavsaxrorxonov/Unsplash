@@ -23,10 +23,9 @@ function Login() {
       const data = await response.json();
       if (data.key) {
         localStorage.setItem("isAuthenticated", data.key);
-        console.log(data.key);
 
         localStorage.setItem("username", username);
-        // navigate(from, { replace: true });
+        navigate(from, { replace: true });
       } else {
         setError("Login yoki parol noto‘g‘ri!");
       }
