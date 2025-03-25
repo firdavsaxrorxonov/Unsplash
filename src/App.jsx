@@ -1,30 +1,38 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './pages/Home';
-import About from './pages/About';
-import Contact from './pages/Contact';
+import DevImages from './pages/DevImages';
 import MainLayout from './layouts/MainLayout';
 import LikedImages from './pages/LikedImages';
-import { action as HomeAction } from './pages/Home'
-import DownloadedImages from './pages/DownloadedImages';
-
+import Login from './pages/Login';
+import Register from './pages/Register';
+import { action as HomeAction } from './pages/Home';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <MainLayout />,
+    element: <ProtectedRoute><MainLayout /></ProtectedRoute>,
     children: [
-      { index: true, element: <Home></Home>, action: HomeAction },
-      { path: 'about', element: <About /> },
-      { path: 'contact', element: <Contact /> },
+      { index: true, element: <Home />, action: HomeAction },
       { path: 'liked', element: <LikedImages /> },
-      { path: 'downloadImages', element: <DownloadedImages /> },
+      { path: 'devImages', element: <DevImages /> },
     ],
   },
+  { path: '/login', element: <Login /> },
+  { path: '/register', element: <Register /> },
 ]);
 
+
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <ToastContainer position="bottom-left" autoClose={3000} />
+      <RouterProvider router={router} />
+    </>
+  );
 }
 
 export default App;

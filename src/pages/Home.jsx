@@ -48,7 +48,7 @@ function Home() {
   }
 
   return (
-    <div className='align-elements px-2'>
+    <div className=' px-2'>
       <div className='my-10'>
         <Search />
       </div>

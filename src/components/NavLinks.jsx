@@ -6,13 +6,9 @@ const navLinks = [
     text: "Home"
   },
   {
-    path: "/about",
-    text: "About"
+    path: "/devImages",
+    text: "DevPics"
   },
-  {
-    path: "/contact",
-    text: "Contact"
-  }
 ]
 
 

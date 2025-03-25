@@ -16,7 +16,7 @@ function LikedImages() {
   }
 
   return (
-    <div>
+    <div className='pt-18'>
       {likedImages.length > 0 && <ImageContainer images={likedImages} />}
     </div>
   )
